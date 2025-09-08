@@ -1,0 +1,61 @@
+from collections import deque
+
+# State = (M_left, C_left, Boat_side, M_right, C_right)
+# Boat_side: 'L' = left, 'R' = right
+
+def is_valid(m_left, c_left, boat, m_right, c_right):
+    # Missionaries should not be outnumbered on either side
+    if (m_left < c_left and m_left > 0):
+        return False
+    if (m_right < c_right and m_right > 0):
+        return False
+    return True
+
+def missionaries_cannibals():
+    start = (3, 3, 'L', 0, 0)   # all 3 missionaries & 3 cannibals on left
+    goal = (0, 0, 'R', 3, 3)    # all 3 missionaries & 3 cannibals on right
+    
+    q = deque([(start, [start])])
+    visited = set([start])
+
+    moves = [(1,0), (2,0), (0,1), (0,2), (1,1)]  # (M, C) possible boat moves
+
+    while q:
+        state, path = q.popleft()
+        m_left, c_left, boat, m_right, c_right = state
+
+        if state == goal:
+            return path  # solution found ✅
+
+        for m, c in moves:
+            if boat == 'L':  # Move left -> right
+                new_state = (m_left - m, c_left - c, 'R',
+                             m_right + m, c_right + c)
+            else:            # Move right -> left
+                new_state = (m_left + m, c_left + c, 'L',
+                             m_right - m, c_right - c)
+
+            # Skip invalid states
+            if min(new_state[0], new_state[1], new_state[3], new_state[4]) < 0:
+                continue
+            if max(new_state[0], new_state[1], new_state[3], new_state[4]) > 3:
+                continue
+
+            if new_state not in visited and is_valid(*new_state):
+                visited.add(new_state)
+                q.append((new_state, path + [new_state]))
+
+    return None
+
+# Run program
+solution = missionaries_cannibals()
+
+if solution:
+    print("Solution Path:")
+    for step in solution:
+        print(step)
+else:
+    print("No solution found")
+
+
+
