@@ -1,0 +1,36 @@
+def vacuum_world(state):
+    # state = [Vacuum_position, A_status, B_status]
+    # Vacuum_position: 'A' or 'B'
+    # A_status, B_status: 'Dirty' or 'Clean'
+    
+    print("Initial State:", state)
+
+    position = state[0]
+    A = state[1]
+    B = state[2]
+
+    if position == 'A':
+        if A == 'Dirty':
+            print("Vacuum in A → Clean A")
+            A = 'Clean'
+        print("Move Right to B")
+        if B == 'Dirty':
+            print("Vacuum in B → Clean B")
+            B = 'Clean'
+
+    elif position == 'B':
+        if B == 'Dirty':
+            print("Vacuum in B → Clean B")
+            B = 'Clean'
+        print("Move Left to A")
+        if A == 'Dirty':
+            print("Vacuum in A → Clean A")
+            A = 'Clean'
+
+    print("Final State: [Vacuum at", position, ", A:", A, ", B:", B, "]")
+
+# Example 1
+vacuum_world(['A', 'Dirty', 'Dirty'])
+
+# Example 2
+vacuum_world(['B', 'Clean', 'Dirty'])
