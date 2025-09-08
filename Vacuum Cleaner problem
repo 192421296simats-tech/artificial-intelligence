@@ -34,3 +34,15 @@ vacuum_world(['A', 'Dirty', 'Dirty'])
 
 # Example 2
 vacuum_world(['B', 'Clean', 'Dirty'])
+
+output:
+
+Initial State: ['A', 'Dirty', 'Dirty']
+Vacuum in A → Clean A
+Move Right to B
+Vacuum in B → Clean B
+Final State: [Vacuum at A , A: Clean , B: Clean ]
+Initial State: ['B', 'Clean', 'Dirty']
+Vacuum in B → Clean B
+Move Left to A
+Final State: [Vacuum at B , A: Clean , B: Clean ]
