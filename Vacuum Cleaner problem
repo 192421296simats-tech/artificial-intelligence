@@ -1,48 +1,25 @@
-def vacuum_world(state):
-    # state = [Vacuum_position, A_status, B_status]
-    # Vacuum_position: 'A' or 'B'
-    # A_status, B_status: 'Dirty' or 'Clean'
-    
-    print("Initial State:", state)
+def vacuum_cleaner(room, pos):
+    steps = []
+    while "Dirty" in room.values():
+        if room[pos] == "Dirty":
+            steps.append(f"Clean {pos}")
+            room[pos] = "Clean"
+        else:
+            # Move to the other room
+            if pos == "Left":
+                steps.append("Move Right")
+                pos = "Right"
+            else:
+                steps.append("Move Left")
+                pos = "Left"
+    return steps
 
-    position = state[0]
-    A = state[1]
-    B = state[2]
+# Example rooms: both start dirty
+room = {"Left": "Dirty", "Right": "Dirty"}
+start_pos = "Left"
 
-    if position == 'A':
-        if A == 'Dirty':
-            print("Vacuum in A → Clean A")
-            A = 'Clean'
-        print("Move Right to B")
-        if B == 'Dirty':
-            print("Vacuum in B → Clean B")
-            B = 'Clean'
+steps = vacuum_cleaner(room, start_pos)
 
-    elif position == 'B':
-        if B == 'Dirty':
-            print("Vacuum in B → Clean B")
-            B = 'Clean'
-        print("Move Left to A")
-        if A == 'Dirty':
-            print("Vacuum in A → Clean A")
-            A = 'Clean'
-
-    print("Final State: [Vacuum at", position, ", A:", A, ", B:", B, "]")
-
-# Example 1
-vacuum_world(['A', 'Dirty', 'Dirty'])
-
-# Example 2
-vacuum_world(['B', 'Clean', 'Dirty'])
-
-output:
-
-Initial State: ['A', 'Dirty', 'Dirty']
-Vacuum in A → Clean A
-Move Right to B
-Vacuum in B → Clean B
-Final State: [Vacuum at A , A: Clean , B: Clean ]
-Initial State: ['B', 'Clean', 'Dirty']
-Vacuum in B → Clean B
-Move Left to A
-Final State: [Vacuum at B , A: Clean , B: Clean ]
+print("Steps taken by Vacuum Cleaner:")
+for s in steps:
+    print(s)
