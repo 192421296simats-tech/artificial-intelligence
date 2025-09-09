@@ -1,44 +1,40 @@
 from collections import deque
 
-def water_jug(x, y, d):
+def water_jug_bfs(jug1, jug2, target):
     visited = set()
-    q = deque([(0, 0)])   # (jug1, jug2)
-
-    while q:
-        a, b = q.popleft()
+    queue = deque()
+    # Start with both jugs empty
+    queue.append((0, 0))
+    while queue:
+        a, b = queue.popleft()
         if (a, b) in visited:
             continue
         visited.add((a, b))
-
-        print(a, b)  # current state
-
-        if a == d or b == d:
-            print("Solved!")
-            return
-
-        # Possible moves
-        q.append((x, b))        # Fill jug1
-        q.append((a, y))        # Fill jug2
-        q.append((0, b))        # Empty jug1
-        q.append((a, 0))        # Empty jug2
-        q.append((a - min(a, y - b), b + min(a, y - b)))  # Pour jug1 → jug2
-        q.append((a + min(b, x - a), b - min(b, x - a)))  # Pour jug2 → jug1
-
-    print("No solution")
-
-                                                                                
-
-output:
-0 0
-4 0
-0 3
-4 3
-1 3
-3 0
-1 0
-3 3
-0 1
-4 2
-Solved!
-
-=== Code Execution Successful ===
+        
+        print(f"Jug1: {a}, Jug2: {b}")
+        
+        # Check if target reached
+        if a == target or b == target:
+            print("\nTarget reached!")
+            return True
+        # Possible operations
+        next_states = [
+            (jug1, b),      # Fill Jug1
+            (a, jug2),      # Fill Jug2
+            (0, b),         # Empty Jug1
+            (a, 0),         # Empty Jug2
+            # Pour Jug1 → Jug2
+            (a - min(a, jug2 - b), b + min(a, jug2 - b)),
+            # Pour Jug2 → Jug1
+            (a + min(b, jug1 - a), b - min(b, jug1 - a)),
+        ]
+        
+        for state in next_states:
+            if state not in visited:
+                queue.append(state)
+    
+    print("\n No solution possible.")
+    return False
+if __name__ == "__main__":
+    jug1, jug2, target = 4, 3, 2  # Example: 4L jug, 3L jug, target=2
+    water_jug_bfs(jug1, jug2, target)
