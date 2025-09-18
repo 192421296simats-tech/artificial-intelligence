@@ -1,0 +1,50 @@
+<!-- Blog Title -->
+<h1 id="top">Welcome to My Web Blog</h1>
+
+<!-- Paragraph -->
+<p>This is my first blog post demonstrating basic HTML tags in WordPress.</p>
+
+<!-- Anchor Tag -->
+<p>Visit <a href="https://www.example.com" target="_blank">Example Website</a> for more information.</p>
+
+<!-- Image Tag -->
+<img src="https://via.placeholder.com/300" alt="Placeholder Image" />
+
+<!-- Subheading -->
+<h2>About This Blog</h2>
+<p>This blog is created to demonstrate HTML elements like anchor tags, title tags, headings, and images.</p>
+
+<!-- Unordered List -->
+<h2>HTML Tags Demonstrated:</h2>
+<ul>
+  <li>Title Tag</li>
+  <li>Heading Tags (h1, h2)</li>
+  <li>Paragraph Tag</li>
+  <li>Anchor Tag</li>
+  <li>Image Tag</li>
+  <li>Unordered List</li>
+</ul>
+
+<!-- Table -->
+<h2>Sample Table</h2>
+<table border="1" cellpadding="5">
+  <tr>
+    <th>Tag</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>&lt;h1&gt;</td>
+    <td>Main heading of the page</td>
+  </tr>
+  <tr>
+    <td>&lt;a&gt;</td>
+    <td>Used for hyperlinks</td>
+  </tr>
+  <tr>
+    <td>&lt;img&gt;</td>
+    <td>Used to display images</td>
+  </tr>
+</table>
+
+<!-- Anchor link to top -->
+<p>Go back to <a href="#top">top of the page</a>.</p>
